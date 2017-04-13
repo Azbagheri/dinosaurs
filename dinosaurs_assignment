@@ -1,0 +1,28 @@
+Assignment Dinosaur DB
+
+1. Count the number of dinosaurs.
+SELECT COUNT(*) FROM dinos;
+
+2. Find all the dinosaurs from the Jurassic period
+SELECT * FROM dinos WHERE period = 'Jurassic';
+
+3. Find the total sum length of all the dinosaurs from the Cretaceous period.
+SELECT SUM(length) FROM dinos WHERE period = 'Cretaceous';
+
+4. Find all the dinosaurs from either the Jurassic OR Cretaceous periods, and order them by their species name alphabetically.
+SELECT * FROM dinos WHERE (period = 'Cretaceous') OR (period = 'Jurassic') ORDER BY species;
+
+5. Find all the dinosaurs from the t_order Saurischia that are Herbivorous.
+SELECT * FROM dinos WHERE t_order = 'Saurischia' AND diet = 'Herbivorous';
+
+6. Find the shortest dinosaur, and rename it Shortie
+SELECT name FROM dinos WHERE length = (SELECT MIN(length) FROM dinos);
+This gives me the name of the shortest dinosaure, Liaoxiornis.
+UPDATE dinos SET name = 'Shortie' WHERE name = 'Liaoxiornis';
+
+7. Find the alphabetically first dinosaur, so we can make sure they're present for class.
+SELECT * FROM dinos ORDER BY name ASC LIMIT 1;
+
+8. Rename the five longest dinosaurs The Famous Five.
+UPDATE dinos SET name = 'TheFamous Five' WHERE name IN
+(Select name FROM dinos WHERE length > 0 ORDER BY length DESC LIMIT 5);
